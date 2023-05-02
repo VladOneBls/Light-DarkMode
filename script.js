@@ -6,6 +6,9 @@ const image2 = document.getElementById('image2');
 const image3 = document.getElementById('image3');
 const textBox = document.getElementById('text-box');
 
+const DARK_THEME = 'dark';
+const LIGHT_THEME = 'light';
+
 
 // Dark or Light Images
 function imageMode(color) {
@@ -16,12 +19,12 @@ function imageMode(color) {
 
 
 // Dark & Light Mode Styles
-function toggleDarkLightMode(isDark) {
-    nav.style.backgroundColor = isDark ? 'rgb(0 0 0 / 50%)' : 'rgb(255 255 255 / 50%)';
-    textBox.style.backgroundColor = isDark ? 'rgb(255 255 255 / 50%)' : 'rgb(0 0 0 / 50%)';
-    toggleIcon.children[0].textContent = isDark ? 'Dark Mode' : 'Light Mode';
-    isDark ? toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon') : toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun');;
-    isDark ? imageMode('dark') : imageMode('light');
+function toggleDarkLightMode(color) {
+    nav.style.backgroundColor = (color == 'dark') ? 'rgb(0 0 0 / 50%)' : 'rgb(255 255 255 / 50%)';
+    textBox.style.backgroundColor = (color == 'dark') ? 'rgb(255 255 255 / 50%)' : 'rgb(0 0 0 / 50%)';
+    toggleIcon.children[0].textContent = (color == 'dark') ? 'Dark Mode' : 'Light Mode';
+    (color == 'dark') ? toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon') : toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun');;
+    (color == 'dark') ? imageMode('dark') : imageMode('light');
 }
 
 
@@ -30,11 +33,11 @@ function switchTheme(event) {
     if (event.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        toggleDarkLightMode(true);
+        toggleDarkLightMode(DARK_THEME);
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
-        toggleDarkLightMode(false);
+        toggleDarkLightMode(LIGHT_THEME);
     }
 }
 
@@ -50,6 +53,6 @@ if (currentTheme) {
 
     if (currentTheme === 'dark') {
         toggleSwitch.checked = true;
-        toggleDarkLightMode(true);
+        toggleDarkLightMode(DARK_THEME);
     }
 }
